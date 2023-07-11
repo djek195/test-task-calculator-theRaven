@@ -50,6 +50,11 @@ function App() {
   const handleCalculate = async () => {
     if (!metamaskConnected) return;
 
+    if (!a || !b) {
+      setResult("Please enter both numbers");
+      return;
+    }
+
     try {
       setLoading(true);
       let calculationResult;
