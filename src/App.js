@@ -14,6 +14,7 @@ function App() {
   const [usageCount, setUsageCount] = useState(0);
   const [metamaskConnected, setMetamaskConnected] = useState(false);
   const [calculatorContract, setCalculatorContract] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     checkMetamaskConnection();
@@ -48,16 +49,17 @@ function App() {
 
   const handleCalculate = async () => {
     if (!metamaskConnected) return;
-  
+
     try {
+      setLoading(true);
       let calculationResult;
-  
+
       switch (operation) {
         case "add":
           await calculatorContract.methods
             .add(a.toString(), b.toString())
             .send({ from: window.ethereum.selectedAddress });
-  
+
           calculationResult = await calculatorContract.methods
             .add(a.toString(), b.toString())
             .call();
@@ -66,7 +68,7 @@ function App() {
           await calculatorContract.methods
             .subtract(a.toString(), b.toString())
             .send({ from: window.ethereum.selectedAddress });
-  
+
           calculationResult = await calculatorContract.methods
             .subtract(a.toString(), b.toString())
             .call();
@@ -75,7 +77,7 @@ function App() {
           await calculatorContract.methods
             .multiply(a.toString(), b.toString())
             .send({ from: window.ethereum.selectedAddress });
-  
+
           calculationResult = await calculatorContract.methods
             .multiply(a.toString(), b.toString())
             .call();
@@ -84,7 +86,7 @@ function App() {
           await calculatorContract.methods
             .divide(a.toString(), b.toString())
             .send({ from: window.ethereum.selectedAddress });
-  
+
           calculationResult = await calculatorContract.methods
             .divide(a.toString(), b.toString())
             .call();
@@ -93,15 +95,16 @@ function App() {
           setResult("Invalid operation");
           return;
       }
-  
+
       setResult(calculationResult.toString());
       setUsageCount(usageCount + 1);
     } catch (error) {
       console.error(error);
       setResult("Error occurred");
+    } finally {
+      setLoading(false);
     }
   };
-  
 
   return (
     <div className="wrapper">
@@ -117,6 +120,8 @@ function App() {
         handleCalculate={handleCalculate}
         metamaskConnected={metamaskConnected}
       />
+
+      {loading && <div className="loader"></div>}
 
       <CalculatorResult result={result} />
 
