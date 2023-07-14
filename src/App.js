@@ -102,7 +102,7 @@ function App() {
       }
 
       setResult(calculationResult.toString());
-      setUsageCount(usageCount + 1);
+      fetchUsageCount();
     } catch (error) {
       console.error(error);
       setResult("Error occurred");
