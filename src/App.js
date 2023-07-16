@@ -33,17 +33,17 @@ function App() {
         setMetamaskConnected(false);
         setResult(
           <>
-            <span>Warning:</span> Please check your authorization in Metamask
-            and connection to the test wallet and refresh the page.
+            <p><span>Warning:</span> Please check your authorization in Metamask
+            and connection to the test wallet and refresh the page.</p>
           </>
         );
       }
     } else {
       setResult(
         <>
-          <span>Warning:</span> Please make sure you have installed the Metamask
+          <p><span>Warning:</span> Please make sure you have installed the Metamask
           extension for your browser, logged in, and are using a test wallet and
-          refresh the page.
+          refresh the page.</p>
         </>
       );
     }
