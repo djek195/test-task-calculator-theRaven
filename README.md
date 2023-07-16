@@ -16,6 +16,7 @@ To run the project, follow these steps:
 ## Usage
 
 - Make sure Metamask is activated in your browser. The "Calculate" button will be inactive if Metamask is not activated.
+- Ensure that your Metamask account is not locked.
 - Enter numbers and select an operation in the calculator form.
 - Click the "Calculate" button to perform the calculation.
 - The calculation result will be displayed in the results section.

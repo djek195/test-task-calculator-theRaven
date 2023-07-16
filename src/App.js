@@ -24,9 +24,28 @@ function App() {
 
   const checkMetamaskConnection = async () => {
     if (typeof window.ethereum !== "undefined") {
-      setMetamaskConnected(true);
+      const accounts = await window.ethereum.request({
+        method: "eth_accounts",
+      });
+      if (accounts.length > 0) {
+        setMetamaskConnected(true);
+      } else {
+        setMetamaskConnected(false);
+        setResult(
+          <>
+            <span>Warning:</span> Please check your authorization in Metamask
+            and connection to the test wallet and refresh the page.
+          </>
+        );
+      }
     } else {
-      setMetamaskConnected(false);
+      setResult(
+        <>
+          <span>Warning:</span> Please make sure you have installed the Metamask
+          extension for your browser, logged in, and are using a test wallet and
+          refresh the page.
+        </>
+      );
     }
   };
 
