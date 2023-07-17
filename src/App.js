@@ -122,7 +122,6 @@ function App() {
       setResult(calculationResult.toString());
       fetchUsageCount();
     } catch (error) {
-      console.error(error);
       setResult("Error occurred");
     } finally {
       setLoading(false);
