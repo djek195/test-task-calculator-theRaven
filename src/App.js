@@ -19,7 +19,6 @@ function App() {
   useEffect(() => {
     checkMetamaskConnection();
     setupCalculatorContract();
-    fetchUsageCount();
   }, []);
 
   const checkMetamaskConnection = async () => {
